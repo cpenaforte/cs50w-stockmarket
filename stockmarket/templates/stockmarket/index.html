@@ -1,0 +1,29 @@
+{% extends "stockmarket/layout.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div
+            id="app"
+            data-isauthenticated="{{ user.is_authenticated }}"
+            data-username="{{ user.username }}"
+            data-startpage="{{ start_page }}"
+            class="w-100"
+            style="flex: 1 0 auto;"
+        ></div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            You must be logged in to view this page.
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-demi"></script>
+    <script src="https://unpkg.com/pinia"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="{% static 'stockmarket/main.js' %}" type="module"></script>
+{% endblock %}

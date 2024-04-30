@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="{% static 'stockmarket/styles.css' %}">
+        <title>Stock Market</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary justify-content-between">
+            <a class="navbar-brand text-white" href="{% url 'stockmarket:index' %}">Stock Market</a>
+            <ul class="navbar-nav" style="flex-wrap: nowrap; flex-direction: row; gap: 16px;">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'stockmarket:portfolio_page' %}"
+                            class="nav-link text-light font-weight-bold"
+                            style="user-select: none;"
+                        >
+                            {{ user.username }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'stockmarket:logout' %}" class="nav-link text-light">
+                            Logout
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'stockmarket:login' %}" class="nav-link text-light">
+                            Login
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        {% block content %}
+        {% endblock %}
+        
+        {% block script %}
+        {% endblock %}
+    </body>
+</html>
